@@ -45,9 +45,10 @@ def startup():
     from launch import is_installed, run
     if not is_installed("mmdet"):
         python = sys.executable
-        run(f'"{python}" -m pip install -U openmim', desc="Installing openmim", errdesc="Couldn't install openmim")
+        run(f'"{python}" -m pip install -U openmim -i https://pypi.tuna.tsinghua.edu.cn/simple', desc="Installing openmim", errdesc="Couldn't install openmim")
         run(f'"{python}" -m mim install mmcv-full', desc=f"Installing mmcv-full", errdesc=f"Couldn't install mmcv-full")
-        run(f'"{python}" -m pip install mmdet', desc=f"Installing mmdet", errdesc=f"Couldn't install mmdet")
+        run(f'"{python}" -m pip install mmdet==2.28.2 -i https://pypi.tuna.tsinghua.edu.cn/simple', desc=f"Installing mmdet", errdesc=f"Couldn't install mmdet")
+        run(f'"{python}" -m mim install mmengine', desc=f"Installing mmengine", errdesc=f"Couldn't install mmengine")
 
     if (len(list_models(dd_models_path)) == 0):
         print("No detection models found, downloading...")
